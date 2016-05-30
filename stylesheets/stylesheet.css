@@ -55,7 +55,7 @@ section { /*adjust only for the sections only */
 }
 
 article {
-  background-color: blue;
+  background-color: gray;
   margin-top: 5px;
   padding: 10px 15px;
 }
