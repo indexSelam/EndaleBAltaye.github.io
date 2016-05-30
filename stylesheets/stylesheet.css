@@ -49,7 +49,7 @@ li {
 }
 
 section { /*adjust only for the sections only */
-  background-color: gray#; /* was bbbbbb */
+  background-color: gray; /* was bbbbbb */
   margin-top: 10px;
   padding: 5px;
 }
