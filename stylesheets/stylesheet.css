@@ -57,7 +57,12 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
-
+nav {
+  background-color: green; /* was #20416c */
+  padding: 25px; /* rectangle height */
+  margin-top: 20px; /* gap from the previous rectangle */ 
+  
+}
 h1, h2, h3, h4, h5, h6 {
   margin: 10px 0;
   font-weight: 700;
