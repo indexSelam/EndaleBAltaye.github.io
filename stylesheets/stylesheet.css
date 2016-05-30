@@ -49,7 +49,7 @@ li {
 }
 
 section { /*adjust only for the sections only */
-  background-color: #bbbbbb;
+  background-color: gray#; /* was bbbbbb */
   margin-top: 10px;
   padding: 5px;
 }
@@ -61,14 +61,14 @@ article {
 }
 
 main {
-  width: 940px; /* to length of the box containing the main body with out side */
+  width: 1040px; /* to length of the box containing the main body with out side */
   float: left; /*to keep the aside to the right*/
   margin-bottom: 10px;
 }
 
 aside {
   background-color: #bbbbbb;
-  width: 470px;
+  width: 300px;
   float: right; /* since the main section is on the left*/
   padding: 20px;
   margin-top: 10px;
