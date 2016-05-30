@@ -29,7 +29,7 @@ body {
 }
 
 nav {
-  background-color: green; /* was #20416c */
+  background-color: red; /* was #20416c */
   padding: 25px; /* rectangle height */
   margin-top: 20px; /* gap from the previous rectangle */ 
   
