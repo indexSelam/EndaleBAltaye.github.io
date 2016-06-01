@@ -14,8 +14,8 @@ article, aside, footer, header, main, nav, section {
 .banner { 
   background-color: maroon; /*was #11233b */
   color: black;
-  padding: 20px 20px;
-  font-size: 40px;
+  padding: 10px 10px;
+  font-size: 30px;
   font-family: "Times New Roman", Georgia, Serif;
 }
 
@@ -23,21 +23,23 @@ body {
   width: 1500px; /* size of the web page */
   margin-left: auto; /* for keeping the webpage center */
   margin-right: auto;
-  background-color: black; /* was #f0f0f0 */
+  background-color: LightGray ; /* was #f0f0f0 */
   font-family: Helvetica, Arial, sans-serif;
-  font-size: 30px;
+  font-size: 25px;
 }
-
 nav {
-  background-color: green; /* was #20416c */
-  padding: 25px; /* rectangle height */
-  margin-top: 20px; /* gap from the previous rectangle */ 
-  
+  background-color: LightGray ; /* was #20416c */
+  padding: 10px; /* rectangle height */
+   margin-top: 5px; /* gap from the previous rectangle */ 
+  font-size: 20px;
 }
 /* for an elements under the list i.e on html <li><a> ....</a></li> */
   li a {  color: black;
-       font-size: 50px;
+       font-size: 25px;
 }
+
+
+
 
 li {
   display: inline;
@@ -49,7 +51,7 @@ li {
 }
 
 section { /*adjust only for the sections only */
-  background-color: gray; /* was #bbbbbb */
+  background-color: LightGrey ; /* was #bbbbbb */
   margin-top: 10px;
   padding: 5px;
 }
@@ -66,7 +68,7 @@ main {
   margin-bottom: 10px;
 }
 
-aside {
+aside{
   background-color: #bbbbbb;
   width: 300px;
   float: right; /* since the main section is on the left*/
@@ -74,10 +76,12 @@ aside {
   margin-top: 10px;
 }
 
+
 footer {
   clear: both;
   background-color: #20416c;
   color: white;
   padding: 5px 20px;
 }
+
 
