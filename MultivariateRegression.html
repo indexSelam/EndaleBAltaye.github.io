@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 <title>MultivariateRegression</title>
-
+ <link rel="stylesheet" type="text/css" href="Githubwebsitecss.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
@@ -120,10 +120,12 @@ body {
   overflow: visible;
   padding: 8px;
 }
+
 div#notebook {
   overflow: visible;
   border-top: none;
 }
+
 @media print {
   div.cell {
     display: block;
@@ -166,6 +168,20 @@ div#notebook {
     </script>
     <!-- End of mathjax configuration --></head>
 <body>
+<header class="banner"> 
+      <h1>Endale B Altaye</h1>
+      <h4>Business Analytics Graduate <br> Bowling Green State University</h4>
+    </header>
+
+    <nav>
+      <ul>
+	   <li><a href="Githubwebsite.html">Home</a></li>
+       <li><a href="EndaleBAltayeResume.html">Resume</a></li>
+       <li><a href="MultivariateRegression.html">InclassProject</a></li>
+	   <li><a href="courses.html">Grad.Courses</a></li>
+      </ul>
+    </nav>
+
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
@@ -178,20 +194,31 @@ div#notebook {
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Multivariate multiple linear regression: several y’s and several x’s. Multivariate refers
+to the dependent variables and multiple pertains to the independent variables.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[54]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="kp">suppressMessages</span><span class="p">(</span><span class="kn">library</span><span class="p">(</span>car<span class="p">))</span>
-<span class="kp">suppressMessages</span><span class="p">(</span><span class="kn">library</span><span class="p">(</span>xlsx<span class="p">))</span>
-<span class="kp">suppressMessages</span><span class="p">(</span><span class="kn">library</span><span class="p">(</span>psych<span class="p">))</span>
-<span class="kp">suppressMessages</span><span class="p">(</span><span class="kn">library</span><span class="p">(</span>dplyr<span class="p">))</span>
-<span class="kp">suppressMessages</span><span class="p">(</span><span class="kn">library</span><span class="p">(</span>ggplot2<span class="p">))</span>
-<span class="kp">suppressMessages</span><span class="p">(</span><span class="kn">library</span><span class="p">(</span>knitr<span class="p">))</span>
-<span class="kp">suppressMessages</span><span class="p">(</span><span class="kn">library</span><span class="p">(</span>gridExtra<span class="p">))</span>
-<span class="kn">library</span><span class="p">(</span>repr<span class="p">)</span>
-<span class="kp">options</span><span class="p">(</span>repr.plot.width<span class="o">=</span><span class="m">7</span><span class="p">,</span>repr.plot.height<span class="o">=</span><span class="m">4</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span>Steps<span class="o">:</span>
+    <span class="o">*</span> Overall significance test. Testing the existence of at least one predictor variable to explain at least one of the
+       response variable. 
+    <span class="o">*</span> Variable selection using Backward elimination
+    <span class="o">*</span> Model improvement
+        <span class="o">+</span> Interaction included
+        <span class="o">+</span> R<span class="o">-</span>square and S used <span class="kr">for</span> assessment
+    <span class="o">*</span> Multivariate Normality assessed
+    <span class="o">*</span> Residual assessment
 </pre></div>
 
 </div>
@@ -201,10 +228,90 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[50]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>forest<span class="o">=</span>read.xlsx<span class="p">(</span><span class="s">&quot;C:/Users/selamina/Desktop/break/PythonText/PythonRJupyter/forest.xlsx&quot;</span><span class="p">,</span><span class="m">1</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span>libs <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;car&quot;</span><span class="p">,</span><span class="s">&quot;xlsx&quot;</span><span class="p">,</span><span class="s">&quot;psych&quot;</span><span class="p">,</span><span class="s">&quot;dplyr&quot;</span><span class="p">,</span><span class="s">&quot;ggplot2&quot;</span><span class="p">,</span><span class="s">&quot;knitr&quot;</span><span class="p">,</span><span class="s">&quot;gridExtra&quot;</span><span class="p">)</span>
+<span class="kp">lapply</span><span class="p">(</span>libs<span class="p">,</span><span class="kn">require</span><span class="p">,</span> character.only<span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>repr<span class="p">)</span>
+<span class="kp">options</span><span class="p">(</span>repr.plot.width<span class="o">=</span><span class="m">7</span><span class="p">,</span>repr.plot.height<span class="o">=</span><span class="m">4</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<!--<pre>Loading required package: car
+Loading required package: xlsx
+Loading required package: rJava
+Loading required package: xlsxjars
+Loading required package: psych
+
+Attaching package: &apos;psych&apos;
+
+The following object is masked from &apos;package:car&apos;:
+
+    logit
+
+Loading required package: dplyr
+
+Attaching package: &apos;dplyr&apos;
+
+The following objects are masked from &apos;package:stats&apos;:
+
+    filter, lag
+
+The following objects are masked from &apos;package:base&apos;:
+
+    intersect, setdiff, setequal, union
+
+Loading required package: ggplot2
+
+Attaching package: &apos;ggplot2&apos;
+
+The following objects are masked from &apos;package:psych&apos;:
+
+    %+%, alpha
+
+Loading required package: knitr
+Loading required package: gridExtra
+</pre> 
+</div>
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<ol>
+	<li>TRUE</li>
+	<li>TRUE</li>
+	<li>TRUE</li>
+	<li>TRUE</li>
+	<li>TRUE</li>
+	<li>TRUE</li>
+	<li>TRUE</li>
+</ol>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>-->
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>multdata<span class="o">=</span>read.xlsx<span class="p">(</span><span class="s">&quot;C:/Users/selamina/...data.xlsx&quot;</span><span class="p">,</span><span class="m">1</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -221,19 +328,28 @@ div#notebook {
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+$$ H_0:  \beta=0 \hspace{12pt}  vs \hspace{12pt}  H_a:\beta \neq 0  \hspace{12pt}  \text{for at least one}\hspace{8pt} \beta_{ij} $$
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[51]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="kp">message</span><span class="p">(</span><span class="s">&quot;H0: B = O vs H1: B != O, (We want to know whether at least one Bjk != 0, </span>
-<span class="s">to explain at least one of the responce variable.&quot;</span><span class="p">)</span>
-forestModel<span class="o">=</span><span class="s">&quot;cbind(y1,y2,y3)~x3+x4+x5+x6+x7+x8+x9+x10+x11+x12+x13+x14+x15+x16&quot;</span>
-forestFullModel<span class="o">&lt;-</span> lm<span class="p">(</span>forestModel<span class="p">,</span> data<span class="o">=</span>forest<span class="p">)</span> 
+<div class=" highlight hl-r"><pre><span></span><span class="c1">#message(&quot;H0: B = O vs H1: B != O, (We want to know whether at least one Bjk != 0, </span>
+<span class="c1">#to explain at least one of the response variable.&quot;)</span>
+multdataModel<span class="o">=</span><span class="s">&quot;cbind(y1,y2,y3)~x3+x4+x5+x6+x7+x8+x9+x10+x11+x12+x13+x14+x15+x16&quot;</span>
+multdataFullModel<span class="o">&lt;-</span> lm<span class="p">(</span>multdataModel<span class="p">,</span> data<span class="o">=</span>multdata<span class="p">)</span> 
 <span class="kt">c</span><span class="o">=</span><span class="kp">diag</span><span class="p">(</span><span class="m">15</span><span class="p">)[</span><span class="m">2</span><span class="o">:</span><span class="m">15</span><span class="p">,]</span> <span class="c1"># first column is for the const term</span>
-<span class="p">(</span>OverallFit <span class="o">&lt;-</span> linearHypothesis<span class="p">(</span>model <span class="o">=</span> forestFullModel<span class="p">,</span> hypothesis.matrix <span class="o">=</span> <span class="kt">c</span><span class="p">))</span> <span class="c1">#Spits H, E and Sign for over all</span>
-<span class="kp">message</span><span class="p">(</span><span class="s">&quot;From all the four multivariate test statistics, we can conclude as there exist at least one potential predictor variable</span>
-<span class="s">to explain at least one of the responce variable.&quot;</span><span class="p">)</span>
+<span class="p">(</span>OverallFit <span class="o">&lt;-</span> linearHypothesis<span class="p">(</span>model <span class="o">=</span> multdataFullModel<span class="p">,</span> hypothesis.matrix <span class="o">=</span> <span class="kt">c</span><span class="p">))</span> <span class="c1">#Spits H, E and Sign for over all</span>
+<span class="c1">#message(&quot;From all the four multivariate test statistics, we can conclude as there exist at least one potential predictor variable</span>
+<span class="c1">#to explain at least one of the response variable.&quot;)</span>
 </pre></div>
 
 </div>
@@ -243,14 +359,6 @@ forestFullModel<span class="o">&lt;-</span> lm<span class="p">(</span>forestMode
 <div class="output_wrapper">
 <div class="output">
 
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>H0: B = O vs H1: B != O, (We want to know whether at least one Bjk != 0, 
-to explain at least one of the responce variable.
-</pre>
-</div>
-</div>
 
 <div class="output_area"><div class="prompt"></div>
 
@@ -281,17 +389,19 @@ Signif. codes:  0 &apos;***&apos; 0.001 &apos;**&apos; 0.01 &apos;*&apos; 0.05 &
 
 </div>
 
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>From all the four multivariate test statistics, we can conclude as there exist at least one potential predictor variable
-to explain at least one of the responce variable.
-</pre>
 </div>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As we can see in all four multivariate test statistics, we can conclude that there exist at least one potential predictor variable to explain at least one of the response variable at 5 percent level of significance.</p>
 
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -311,15 +421,26 @@ to explain at least one of the responce variable.
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I chose to implement the Backward elimination, but could be tried Stepwise or forward selection as well. The concept for backward elimination is to compute $X_j$ given $X_{-j}$ , using Sum of Square of Type III; 
+then drop the one with most insignificant one. Note that $X_{-j}$ means all the predictor variables except $j^{th}$.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[53]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="kp">message</span><span class="p">(</span><span class="s">&quot;The concept is to compute Xj-given-all_X, using Sum of Square of Type III; </span>
-<span class="s">then drop the one with most insignificant one or the least contributer.&quot;</span><span class="p">)</span>
-Manova<span class="p">(</span>forestFullModel<span class="p">,</span>test.statistic<span class="o">=</span><span class="s">&quot;Wilks&quot;</span><span class="p">)</span>
-<span class="kp">message</span><span class="p">(</span><span class="s">&quot;The P-value per variable has been assesed and the one with largest p-value is dropped, which is X10 with p-value=0.89213&quot;</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span><span class="c1">#message(&quot;The concept is to compute Xj-given-all_X, using Sum of Square of Type III; </span>
+<span class="c1">#then drop the one with most insignificant one or the least contributer.&quot;)</span>
+Manova<span class="p">(</span>multdataFullModel<span class="p">,</span>test.statistic<span class="o">=</span><span class="s">&quot;Wilks&quot;</span><span class="p">)</span>
+<span class="c1">#message(&quot;The P-value per variable has been assessed and the one with largest p-value is dropped, which is X10 with p-value=0.89213&quot;)</span>
 </pre></div>
 
 </div>
@@ -329,14 +450,6 @@ Manova<span class="p">(</span>forestFullModel<span class="p">,</span>test.statis
 <div class="output_wrapper">
 <div class="output">
 
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>The concept is to compute Xj-given-all_X, using Sum of Square of Type III; 
-then drop the one with most insignificant one or the least contributer.
-</pre>
-</div>
-</div>
 
 <div class="output_area"><div class="prompt"></div>
 
@@ -365,16 +478,19 @@ Signif. codes:  0 &apos;***&apos; 0.001 &apos;**&apos; 0.01 &apos;*&apos; 0.05 &
 
 </div>
 
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>The P-value per variable has been assesed and the one with largest p-value is dropped, which is X10 with p-value=0.89213
-</pre>
 </div>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The p-value for each variable has been assessed and the one with largest p-value is dropped, which is X10 with p-value=0.89213. Then X10 is dropped to move to next step.</p>
 
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -387,10 +503,10 @@ Signif. codes:  0 &apos;***&apos; 0.001 &apos;**&apos; 0.01 &apos;*&apos; 0.05 &
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>reduced1<span class="o">=</span>update<span class="p">(</span>forestFullModel<span class="p">,</span><span class="m">.</span><span class="o">~</span><span class="m">.</span><span class="o">-</span>x10<span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span>reduced1<span class="o">=</span>update<span class="p">(</span>multdataFullModel<span class="p">,</span><span class="m">.</span><span class="o">~</span><span class="m">.</span><span class="o">-</span>x10<span class="p">)</span>
 Manova<span class="p">(</span>reduced1<span class="p">,</span>test.statistic<span class="o">=</span><span class="s">&quot;Wilks&quot;</span><span class="p">)</span>
 </pre></div>
 
@@ -432,18 +548,22 @@ Signif. codes:  0 &apos;***&apos; 0.001 &apos;**&apos; 0.01 &apos;*&apos; 0.05 &
 </div>
 
 </div>
+<p style="color:red;text-align:center;font-size:150%;"> Steps deleted here <p>
+<!--
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
+
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+
 <h4 id="2.3.-x7-dropped">2.3. x7 dropped<a class="anchor-link" href="#2.3.-x7-dropped">&#182;</a></h4>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>reduced2<span class="o">=</span>update<span class="p">(</span>reduced1<span class="p">,</span><span class="m">.</span><span class="o">~</span><span class="m">.</span><span class="o">-</span>x7<span class="p">)</span>
@@ -498,7 +618,7 @@ Signif. codes:  0 &apos;***&apos; 0.001 &apos;**&apos; 0.01 &apos;*&apos; 0.05 &
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>reduced3<span class="o">=</span>update<span class="p">(</span>reduced2<span class="p">,</span><span class="m">.</span><span class="o">~</span><span class="m">.</span><span class="o">-</span>x8<span class="p">)</span>
@@ -552,7 +672,7 @@ Signif. codes:  0 &apos;***&apos; 0.001 &apos;**&apos; 0.01 &apos;*&apos; 0.05 &
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>reduced4<span class="o">=</span>update<span class="p">(</span>reduced3<span class="p">,</span><span class="m">.</span><span class="o">~</span><span class="m">.</span><span class="o">-</span>x3<span class="p">)</span>
@@ -594,6 +714,7 @@ Signif. codes:  0 &apos;***&apos; 0.001 &apos;**&apos; 0.01 &apos;*&apos; 0.05 &
 </div>
 
 </div>
+
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -605,7 +726,7 @@ Signif. codes:  0 &apos;***&apos; 0.001 &apos;**&apos; 0.01 &apos;*&apos; 0.05 &
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>reduced5<span class="o">=</span>update<span class="p">(</span>reduced4<span class="p">,</span><span class="m">.</span><span class="o">~</span><span class="m">.</span><span class="o">-</span>x15<span class="p">)</span>
@@ -646,6 +767,7 @@ Signif. codes:  0 &apos;***&apos; 0.001 &apos;**&apos; 0.01 &apos;*&apos; 0.05 &
 </div>
 
 </div>
+-->
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -657,7 +779,7 @@ Signif. codes:  0 &apos;***&apos; 0.001 &apos;**&apos; 0.01 &apos;*&apos; 0.05 &
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>reduced6<span class="o">=</span>update<span class="p">(</span>reduced5<span class="p">,</span><span class="m">.</span><span class="o">~</span><span class="m">.</span><span class="o">-</span>x4<span class="p">)</span>
@@ -708,7 +830,7 @@ Signif. codes:  0 &apos;***&apos; 0.001 &apos;**&apos; 0.01 &apos;*&apos; 0.05 &
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>reduced7<span class="o">=</span>update<span class="p">(</span>reduced6<span class="p">,</span><span class="m">.</span><span class="o">~</span><span class="m">.</span><span class="o">-</span>x11<span class="p">)</span>
@@ -753,96 +875,46 @@ Signif. codes:  0 &apos;***&apos; 0.001 &apos;**&apos; 0.01 &apos;*&apos; 0.05 &
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Model-comparision-for-final-step-#-include/Exclude-x13.">Model comparision for final step # include/Exclude x13.<a class="anchor-link" href="#Model-comparision-for-final-step-#-include/Exclude-x13.">&#182;</a></h4>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>reduced8<span class="o">=</span>update<span class="p">(</span>reduced7<span class="p">,</span><span class="m">.</span><span class="o">~</span><span class="m">.</span><span class="o">-</span>x13<span class="p">)</span>
-anova<span class="p">(</span>reduced7<span class="p">,</span> reduced8<span class="p">,</span> test <span class="o">=</span> <span class="s">&quot;Wilks&quot;</span><span class="p">)</span> <span class="c1"># sign. so we keep All</span>
-<span class="kp">message</span><span class="p">(</span><span class="s">&quot;Decided not to drop x13. for alpha value of 26.889% &quot;</span><span class="p">)</span>
-<span class="kp">message</span><span class="p">(</span><span class="s">&quot;Selected model: formula = cbind(y1, y2, y3) ~ x5 + x6 + x9 + x12 + x13 + x14 + x16&quot;</span><span class="p">)</span>
-</pre></div>
+<p>Since the biggest p-value is 0.26889, its acceptable not to drop any variable afterwards, just to be on the safe side.</p>
 
 </div>
 </div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-
-<div class="output_html rendered_html output_subarea ">
-<table>
-<thead><tr><th></th><th scope=col>Res.Df</th><th scope=col>Df</th><th scope=col>Gen.var.</th><th scope=col>Wilks</th><th scope=col>approx F</th><th scope=col>num Df</th><th scope=col>den Df</th><th scope=col>Pr(>F)</th></tr></thead>
-<tbody>
-	<tr><th scope=row>1</th><td>27</td><td>NA</td><td>0.277564</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td></tr>
-	<tr><th scope=row>2</th><td>28</td><td>1</td><td>0.2817761</td><td>0.8570262</td><td>1.390212</td><td>3</td><td>25</td><td>0.2688942</td></tr>
-</tbody>
-</table>
-
-</div>
-
-</div>
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>Decided not to drop x13. for alpha value of 26.889% 
-Selected model: formula = cbind(y1, y2, y3) ~ x5 + x6 + x9 + x12 + x13 + x14 + x16
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="R-Square-and-S-Computation-for-model-improvement">R-Square and S Computation for model improvement<a class="anchor-link" href="#R-Square-and-S-Computation-for-model-improvement">&#182;</a></h2>
+<h2 id="R-Square-and-S-Computation-for-model-improvement-assessment">R-Square and S Computation for model improvement assessment<a class="anchor-link" href="#R-Square-and-S-Computation-for-model-improvement-assessment">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="kp">message</span><span class="p">(</span><span class="s">&quot;## Association for model improvement &quot;</span><span class="p">)</span>
-
-<span class="c1">#1.R-Square For the final model selected using BackWard elimination</span>
-<span class="kp">message</span><span class="p">(</span><span class="s">&quot;#1.R-Square For the final model selected using BackWard elimination&quot;</span><span class="p">)</span>
-
+<div class=" highlight hl-r"><pre><span></span><span class="c1">#1. R-Square For the final model selected using BackWard elimination</span>
+<span class="kp">message</span><span class="p">(</span><span class="s">&quot;#1.R-Square&quot;</span><span class="p">)</span>
 Intercept<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="kp">rep</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">35</span><span class="p">))</span>
-matX<span class="o">=</span>forest <span class="o">%&gt;%</span> select<span class="p">(</span>x5 <span class="p">,</span> x6<span class="p">,</span> x9 <span class="p">,</span> x12<span class="p">,</span> x13<span class="p">,</span> x14 <span class="p">,</span> x16<span class="p">)</span>
-
+matX<span class="o">=</span>multdata <span class="o">%&gt;%</span> select<span class="p">(</span>x5 <span class="p">,</span> x6<span class="p">,</span> x9 <span class="p">,</span> x12<span class="p">,</span> x13<span class="p">,</span> x14 <span class="p">,</span> x16<span class="p">)</span>
 matX<span class="o">$</span>x16<span class="o">=</span><span class="kp">ifelse</span><span class="p">(</span>matX<span class="o">$</span>x16<span class="o">==</span><span class="s">&quot;Sec&quot;</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">)</span> <span class="c1">#Sec=0, else 1</span>
 matX<span class="o">=</span><span class="kp">as.matrix</span><span class="p">(</span><span class="kp">cbind</span><span class="p">(</span>Intercept<span class="p">,</span>matX<span class="p">))</span>
-yY<span class="o">=</span>forest <span class="o">%&gt;%</span> select<span class="p">(</span>y1<span class="p">,</span>y2<span class="p">,</span>y3<span class="p">)</span>
+yY<span class="o">=</span>multdata <span class="o">%&gt;%</span> select<span class="p">(</span>y1<span class="p">,</span>y2<span class="p">,</span>y3<span class="p">)</span>
 meanY<span class="o">=</span><span class="kp">as.matrix</span><span class="p">(</span><span class="kp">apply</span><span class="p">(</span>yY<span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="kp">mean</span><span class="p">))</span>
 yY<span class="o">=</span><span class="kp">as.matrix</span><span class="p">(</span>yY<span class="p">)</span>
 bhat<span class="o">=</span><span class="kp">solve</span><span class="p">(</span><span class="kp">t</span><span class="p">(</span>matX<span class="p">)</span><span class="o">%*%</span>matX<span class="p">)</span><span class="o">%*%</span><span class="kp">t</span><span class="p">(</span>matX<span class="p">)</span><span class="o">%*%</span>yY <span class="c1"># Pf_H. behaves strange </span>
 
-rSquare<span class="o">=</span><span class="kp">solve</span><span class="p">(</span><span class="kp">t</span><span class="p">(</span>yY<span class="p">)</span><span class="o">%*%</span>yY<span class="m">-35</span><span class="o">*</span>meanY<span class="o">%*%</span><span class="kp">t</span><span class="p">(</span>meanY<span class="p">))</span><span class="o">%*%</span> <span class="p">(</span><span class="kp">t</span><span class="p">(</span>bhat<span class="p">)</span><span class="o">%*%</span><span class="kp">t</span><span class="p">(</span>matX<span class="p">)</span><span class="o">%*%</span>yY<span class="m">-35</span><span class="o">*</span>meanY<span class="o">%*%</span><span class="kp">t</span><span class="p">(</span>meanY<span class="p">))</span>
+rSquare<span class="o">=</span><span class="kp">solve</span><span class="p">(</span><span class="kp">t</span><span class="p">(</span>yY<span class="p">)</span><span class="o">%*%</span>yY<span class="m">-35</span><span class="o">*</span>meanY<span class="o">%*%</span><span class="kp">t</span><span class="p">(</span>meanY<span class="p">))</span><span class="o">%*%</span><span class="p">(</span><span class="kp">t</span><span class="p">(</span>bhat<span class="p">)</span><span class="o">%*%</span><span class="kp">t</span><span class="p">(</span>matX<span class="p">)</span><span class="o">%*%</span>yY<span class="m">-35</span><span class="o">*</span>meanY<span class="o">%*%</span><span class="kp">t</span><span class="p">(</span>meanY<span class="p">))</span>
 tr<span class="p">(</span>rSquare<span class="p">)</span><span class="o">/</span><span class="kp">length</span><span class="p">(</span>meanY<span class="p">)</span>
-rSquare
+<span class="c1">#rSquare</span>
 
-<span class="c1">#2. S</span>
-<span class="kp">message</span><span class="p">(</span><span class="s">&quot;#2. S&quot;</span><span class="p">)</span>
+<span class="c1">#2.S</span>
+<span class="kp">message</span><span class="p">(</span><span class="s">&quot;S-Pooled&quot;</span><span class="p">)</span>
 Sp<span class="o">=</span><span class="kp">t</span><span class="p">(</span>yY<span class="p">)</span><span class="o">%*%</span>yY<span class="o">-</span><span class="kp">t</span><span class="p">(</span>bhat<span class="p">)</span><span class="o">%*%</span><span class="kp">t</span><span class="p">(</span>matX<span class="p">)</span><span class="o">%*%</span>yY
+Sp
+<span class="kp">message</span><span class="p">(</span><span class="s">&quot;trace of S-Pooled&quot;</span><span class="p">)</span>
 <span class="p">(</span>tr<span class="p">(</span>Sp<span class="p">))</span>
-
-<span class="kp">message</span><span class="p">(</span><span class="s">&quot;Without x12: Rsquare=43.87%, S=76.439; With x12: Rsquare=47.43% and s=76.2537. </span>
-<span class="s">So better to keep x12 despite its higher p-value.&quot;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -855,8 +927,7 @@ Sp<span class="o">=</span><span class="kp">t</span><span class="p">(</span>yY<sp
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>## Association for model improvement 
-#1.R-Square For the final model selected using BackWard elimination
+<pre>#1.R-Square
 </pre>
 </div>
 </div>
@@ -870,14 +941,21 @@ Sp<span class="o">=</span><span class="kp">t</span><span class="p">(</span>yY<sp
 </div>
 
 <div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>S-Pooled
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt"></div>
 
 <div class="output_html rendered_html output_subarea ">
 <table>
 <thead><tr><th></th><th scope=col>y1</th><th scope=col>y2</th><th scope=col>y3</th></tr></thead>
 <tbody>
-	<tr><th scope=row>y1</th><td>-0.2313893</td><td>-0.1485719</td><td>-0.0387240</td></tr>
-	<tr><th scope=row>y2</th><td>3.0270700</td><td>1.2664919</td><td>0.6757509</td></tr>
-	<tr><th scope=row>y3</th><td>0.1996068</td><td>0.0322997</td><td>0.3878263</td></tr>
+	<tr><th scope=row>y1</th><td>55.57168</td><td>11.48428</td><td>10.59718</td></tr>
+	<tr><th scope=row>y2</th><td>11.484276</td><td> 2.880592</td><td> 2.846709</td></tr>
+	<tr><th scope=row>y3</th><td>10.597183</td><td> 2.846709</td><td>17.801518</td></tr>
 </tbody>
 </table>
 
@@ -887,7 +965,7 @@ Sp<span class="o">=</span><span class="kp">t</span><span class="p">(</span>yY<sp
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>#2. S
+<pre>trace of S-Pooled
 </pre>
 </div>
 </div>
@@ -900,16 +978,19 @@ Sp<span class="o">=</span><span class="kp">t</span><span class="p">(</span>yY<sp
 
 </div>
 
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>Without x12: Rsquare=43.87%, S=76.439; With x12: Rsquare=47.43% and s=76.2537. So better to keep x12 despite its higher p-value.
-</pre>
 </div>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The backward elimination algorithm returns a model of seven predictor variables. According to this model, 47.43% of the variability in the response variables could be explained by the variables in the model.</p>
 
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -929,31 +1010,27 @@ Sp<span class="o">=</span><span class="kp">t</span><span class="p">(</span>yY<sp
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Picking the most significant once in the selected model above and try to improve model by including interaction among these variables which is between  $x_5$,$x_{14}$ and $x_{16}$.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>modelInteraction<span class="o">=</span>lm<span class="p">(</span><span class="kp">cbind</span><span class="p">(</span>y1<span class="p">,</span>y2<span class="p">,</span>y3<span class="p">)</span><span class="o">~</span>x5<span class="o">+</span>x6<span class="o">+</span>x9<span class="o">+</span>x12<span class="o">+</span>x13<span class="o">+</span>x14<span class="o">+</span>x16<span class="p">,</span>data<span class="o">=</span>forest<span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span>modelInteraction<span class="o">=</span>lm<span class="p">(</span><span class="kp">cbind</span><span class="p">(</span>y1<span class="p">,</span>y2<span class="p">,</span>y3<span class="p">)</span><span class="o">~</span>x5<span class="o">+</span>x6<span class="o">+</span>x9<span class="o">+</span>x12<span class="o">+</span>x13<span class="o">+</span>x14<span class="o">+</span>x16<span class="p">,</span>data<span class="o">=</span>multdata<span class="p">)</span>
 <span class="c1">#Manova(modelInteraction,statistics=&quot;Wilks&quot;)</span>
-<span class="kp">message</span><span class="p">(</span><span class="s">&quot;Picked the most significant once and try to improve model by including interaction among these x5,x14 ,x16&quot;</span><span class="p">)</span>
+<span class="c1">#message(&quot;Picked the most significant once and try to improve model by including interaction among these x5,x14 ,x16&quot;)</span>
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>Picked the most significant once and try to improve model by including interaction among these x5,x14 ,x16
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -972,7 +1049,7 @@ Sp<span class="o">=</span><span class="kp">t</span><span class="p">(</span>yY<sp
 <div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>modelInteraction1<span class="o">=</span>lm<span class="p">(</span><span class="kp">cbind</span><span class="p">(</span>y1<span class="p">,</span>y2<span class="p">,</span>y3<span class="p">)</span><span class="o">~</span>x5<span class="o">+</span>x6<span class="o">+</span>x9<span class="o">+</span>x12<span class="o">+</span>x13<span class="o">+</span>x14<span class="o">+</span>x16<span class="o">+</span>x5<span class="o">*</span>x14<span class="o">+</span>x5<span class="o">*</span>x16<span class="o">+</span>x14<span class="o">*</span>x16<span class="p">,</span>data<span class="o">=</span>forest<span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span>modelInteraction1<span class="o">=</span>lm<span class="p">(</span><span class="kp">cbind</span><span class="p">(</span>y1<span class="p">,</span>y2<span class="p">,</span>y3<span class="p">)</span><span class="o">~</span>x5<span class="o">+</span>x6<span class="o">+</span>x9<span class="o">+</span>x12<span class="o">+</span>x13<span class="o">+</span>x14<span class="o">+</span>x16<span class="o">+</span>x5<span class="o">*</span>x14<span class="o">+</span>x5<span class="o">*</span>x16<span class="o">+</span>x14<span class="o">*</span>x16<span class="p">,</span>data<span class="o">=</span>multdata<span class="p">)</span>
 Manova<span class="p">(</span>modelInteraction1<span class="p">,</span>test.statistics<span class="o">=</span><span class="s">&quot;Wilks&quot;</span><span class="p">)</span>
 </pre></div>
 
@@ -1016,16 +1093,16 @@ Signif. codes:  0 &apos;***&apos; 0.001 &apos;**&apos; 0.01 &apos;*&apos; 0.05 &
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.-Model-Comaprision-between-main-effect-and-Second-Order-Interaction-included-model">3. Model Comaprision between main effect and Second Order Interaction included model<a class="anchor-link" href="#3.-Model-Comaprision-between-main-effect-and-Second-Order-Interaction-included-model">&#182;</a></h3>
+<h3 id="3.-Model-comparision-between-main-effect-model-and-second-order-interaction-included-model">3. Model comparison between main effect model and second order interaction included model<a class="anchor-link" href="#3.-Model-comparision-between-main-effect-model-and-second-order-interaction-included-model">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>anova<span class="p">(</span>modelInteraction<span class="p">,</span> modelInteraction1<span class="p">,</span> test <span class="o">=</span> <span class="s">&quot;Wilks&quot;</span><span class="p">)</span> <span class="c1"># at 20% look good to include interaction</span>
+<div class=" highlight hl-r"><pre><span></span>anova<span class="p">(</span>modelInteraction<span class="p">,</span> modelInteraction1<span class="p">,</span> test <span class="o">=</span> <span class="s">&quot;Wilks&quot;</span><span class="p">)</span> <span class="c1">#</span>
 </pre></div>
 
 </div>
@@ -1060,18 +1137,26 @@ Signif. codes:  0 &apos;***&apos; 0.001 &apos;**&apos; 0.01 &apos;*&apos; 0.05 &
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="4.-Since-including-interaction-improves,-I-am-gonna-drop-some-which-are-strongly-insignificant;-x5:x14-dropped">4. Since including interaction improves, I am gonna drop some which are strongly insignificant; x5:x14 dropped<a class="anchor-link" href="#4.-Since-including-interaction-improves,-I-am-gonna-drop-some-which-are-strongly-insignificant;-x5:x14-dropped">&#182;</a></h3>
+<p>At 20% level of significance, it looks significant to include interaction to the model. However, the model could be improved by droping the most insignificant interactions.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="4.-Droping-x5:x14-interaction">4. Droping x5:x14 interaction<a class="anchor-link" href="#4.-Droping-x5:x14-interaction">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="kp">message</span><span class="p">(</span><span class="s">&quot;## 4. Since including interaction improves the model performance or at least one sig exist, </span>
-<span class="s">I am going to drop some which are strongly insignificant. i.e x5:x14  dropped&quot;</span><span class="p">)</span>
-modelInteraction2<span class="o">=</span>lm<span class="p">(</span><span class="kp">cbind</span><span class="p">(</span>y1<span class="p">,</span>y2<span class="p">,</span>y3<span class="p">)</span><span class="o">~</span>x5<span class="o">+</span>x6<span class="o">+</span>x9<span class="o">+</span>x12<span class="o">+</span>x13<span class="o">+</span>x14<span class="o">+</span>x16<span class="o">+</span>x5<span class="o">*</span>x16<span class="o">+</span>x14<span class="o">*</span>x16<span class="p">,</span>data<span class="o">=</span>forest<span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span>modelInteraction2<span class="o">=</span>lm<span class="p">(</span><span class="kp">cbind</span><span class="p">(</span>y1<span class="p">,</span>y2<span class="p">,</span>y3<span class="p">)</span><span class="o">~</span>x5<span class="o">+</span>x6<span class="o">+</span>x9<span class="o">+</span>x12<span class="o">+</span>x13<span class="o">+</span>x14<span class="o">+</span>x16<span class="o">+</span>x5<span class="o">*</span>x16<span class="o">+</span>x14<span class="o">*</span>x16<span class="p">,</span>data<span class="o">=</span>multdata<span class="p">)</span>
 <span class="c1">#Manova(modelInteraction2,statistics=&quot;Wilks&quot;)</span>
 </pre></div>
 
@@ -1079,46 +1164,31 @@ modelInteraction2<span class="o">=</span>lm<span class="p">(</span><span class="
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>## 4. Since including interaction improves the model performance or at least one sig exist, 
-I am going to drop some which are strongly insignificant. i.e x5:x14  dropped
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="kp">message</span><span class="p">(</span><span class="s">&quot;## R-Square&quot;</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span><span class="kp">message</span><span class="p">(</span><span class="s">&quot;## R-Square for updated model&quot;</span><span class="p">)</span>
 Intercept<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="kp">rep</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">35</span><span class="p">))</span>
-matX<span class="o">=</span>forest <span class="o">%&gt;%</span> select<span class="p">(</span>x5 <span class="p">,</span> x6<span class="p">,</span> x9 <span class="p">,</span>x12<span class="p">,</span> x13<span class="p">,</span> x14 <span class="p">,</span> x16<span class="p">)</span> <span class="o">%&gt;%</span> mutate<span class="p">(</span>x16<span class="o">=</span><span class="kp">ifelse</span><span class="p">(</span>x16<span class="o">==</span><span class="s">&quot;Sec&quot;</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">),</span>x5x16<span class="o">=</span>x5<span class="o">*</span>x16<span class="p">,</span>x14x16<span class="o">=</span>x14<span class="o">*</span>x16<span class="p">)</span>
+matX<span class="o">=</span>multdata <span class="o">%&gt;%</span> select<span class="p">(</span>x5 <span class="p">,</span> x6<span class="p">,</span> x9 <span class="p">,</span>x12<span class="p">,</span> x13<span class="p">,</span> x14 <span class="p">,</span> x16<span class="p">)</span> <span class="o">%&gt;%</span> mutate<span class="p">(</span>x16<span class="o">=</span><span class="kp">ifelse</span><span class="p">(</span>x16<span class="o">==</span><span class="s">&quot;Sec&quot;</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">),</span>x5x16<span class="o">=</span>x5<span class="o">*</span>x16<span class="p">,</span>x14x16<span class="o">=</span>x14<span class="o">*</span>x16<span class="p">)</span>
 matX<span class="o">=</span><span class="kp">as.matrix</span><span class="p">(</span><span class="kp">cbind</span><span class="p">(</span>Intercept<span class="p">,</span>matX<span class="p">))</span>
-yY<span class="o">=</span>forest <span class="o">%&gt;%</span> select<span class="p">(</span>y1<span class="p">,</span>y2<span class="p">,</span>y3<span class="p">)</span>
+yY<span class="o">=</span>multdata <span class="o">%&gt;%</span> select<span class="p">(</span>y1<span class="p">,</span>y2<span class="p">,</span>y3<span class="p">)</span>
 meanY<span class="o">=</span><span class="kp">as.matrix</span><span class="p">(</span><span class="kp">apply</span><span class="p">(</span>yY<span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="kp">mean</span><span class="p">))</span>
 yY<span class="o">=</span><span class="kp">as.matrix</span><span class="p">(</span>yY<span class="p">)</span>
 bhat<span class="o">=</span><span class="kp">solve</span><span class="p">(</span><span class="kp">t</span><span class="p">(</span>matX<span class="p">)</span><span class="o">%*%</span>matX<span class="p">)</span><span class="o">%*%</span><span class="kp">t</span><span class="p">(</span>matX<span class="p">)</span><span class="o">%*%</span>yY <span class="c1"># Pf_H. behaves strange </span>
 
 rSquare<span class="o">=</span><span class="kp">solve</span><span class="p">(</span><span class="kp">t</span><span class="p">(</span>yY<span class="p">)</span><span class="o">%*%</span>yY<span class="m">-35</span><span class="o">*</span>meanY<span class="o">%*%</span><span class="kp">t</span><span class="p">(</span>meanY<span class="p">))</span><span class="o">%*%</span> <span class="p">(</span><span class="kp">t</span><span class="p">(</span>bhat<span class="p">)</span><span class="o">%*%</span><span class="kp">t</span><span class="p">(</span>matX<span class="p">)</span><span class="o">%*%</span>yY<span class="m">-35</span><span class="o">*</span>meanY<span class="o">%*%</span><span class="kp">t</span><span class="p">(</span>meanY<span class="p">))</span>
 tr<span class="p">(</span>rSquare<span class="p">)</span><span class="o">/</span><span class="kp">length</span><span class="p">(</span>meanY<span class="p">)</span>
-rSquare
 
 <span class="c1">#2. S</span>
 <span class="kp">message</span><span class="p">(</span><span class="s">&quot;## 2. S&quot;</span><span class="p">)</span>
 Sp<span class="o">=</span><span class="kp">t</span><span class="p">(</span>yY<span class="p">)</span><span class="o">%*%</span>yY<span class="o">-</span><span class="kp">t</span><span class="p">(</span>bhat<span class="p">)</span><span class="o">%*%</span><span class="kp">t</span><span class="p">(</span>matX<span class="p">)</span><span class="o">%*%</span>yY
+<span class="kp">message</span><span class="p">(</span><span class="s">&quot;S-Pooled&quot;</span><span class="p">)</span>
+Sp
+<span class="kp">message</span><span class="p">(</span><span class="s">&quot;Trace of S-Pooled&quot;</span><span class="p">)</span>
 <span class="p">(</span>tr<span class="p">(</span>Sp<span class="p">))</span>
-<span class="kp">message</span><span class="p">(</span><span class="s">&quot;After including interaction, we manage R-square and S to go from Rsquare=47.43% to 54.62% and s=76.2537 to 61.17 </span>
-<span class="s">which is an important improvment.&quot;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1131,7 +1201,7 @@ Sp<span class="o">=</span><span class="kp">t</span><span class="p">(</span>yY<sp
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>## R-Square
+<pre>## R-Square for updated model
 </pre>
 </div>
 </div>
@@ -1145,14 +1215,22 @@ Sp<span class="o">=</span><span class="kp">t</span><span class="p">(</span>yY<sp
 </div>
 
 <div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>## 2. S
+S-Pooled
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt"></div>
 
 <div class="output_html rendered_html output_subarea ">
 <table>
 <thead><tr><th></th><th scope=col>y1</th><th scope=col>y2</th><th scope=col>y3</th></tr></thead>
 <tbody>
-	<tr><th scope=row>y1</th><td> 0.08269328</td><td>-0.09887467</td><td>-0.04574219</td></tr>
-	<tr><th scope=row>y2</th><td>2.282987</td><td>1.156323</td><td>0.717579</td></tr>
-	<tr><th scope=row>y3</th><td>0.11549497</td><td>0.02199914</td><td>0.39972538</td></tr>
+	<tr><th scope=row>y1</th><td>42.042047</td><td> 8.741411</td><td> 8.894307</td></tr>
+	<tr><th scope=row>y2</th><td>8.741411</td><td>2.260064</td><td>2.286782</td></tr>
+	<tr><th scope=row>y3</th><td> 8.894307</td><td> 2.286782</td><td>16.872124</td></tr>
 </tbody>
 </table>
 
@@ -1162,7 +1240,7 @@ Sp<span class="o">=</span><span class="kp">t</span><span class="p">(</span>yY<sp
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>## 2. S
+<pre>Trace of S-Pooled
 </pre>
 </div>
 </div>
@@ -1175,16 +1253,20 @@ Sp<span class="o">=</span><span class="kp">t</span><span class="p">(</span>yY<sp
 
 </div>
 
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>After including interaction, we manage R-square and S to go from Rsquare=47.43% to 54.62% and s=76.2537 to 61.17 which is an important improvment.
-</pre>
 </div>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>After including interaction, we manage R-square to go from 47.43% to 54.62% and S to go from 76.2537 to 61.17 
+which is good improvement to our preselected model.</p>
 
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -1197,11 +1279,10 @@ Sp<span class="o">=</span><span class="kp">t</span><span class="p">(</span>yY<sp
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="kp">message</span><span class="p">(</span><span class="s">&quot;## Final model MANOVA:&quot;</span><span class="p">)</span>
-Manova<span class="p">(</span>modelInteraction2<span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span>Manova<span class="p">(</span>modelInteraction2<span class="p">)</span>
 <span class="kp">message</span><span class="p">(</span><span class="s">&quot;Final model Coefficients:&quot;</span><span class="p">)</span>
 kable<span class="p">(</span>modelInteraction2<span class="o">$</span>coefficients<span class="p">,</span> digits<span class="o">=</span><span class="m">4</span><span class="p">)</span>
 </pre></div>
@@ -1213,13 +1294,6 @@ kable<span class="p">(</span>modelInteraction2<span class="o">$</span>coefficien
 <div class="output_wrapper">
 <div class="output">
 
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>## Final model MANOVA:
-</pre>
-</div>
-</div>
 
 <div class="output_area"><div class="prompt"></div>
 
@@ -1281,33 +1355,42 @@ Signif. codes:  0 &apos;***&apos; 0.001 &apos;**&apos; 0.01 &apos;*&apos; 0.05 &
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Multivariate-Normality-Assumption-Check-for-Forest-Data">Multivariate Normality Assumption Check for Forest Data<a class="anchor-link" href="#Multivariate-Normality-Assumption-Check-for-Forest-Data">&#182;</a></h2>
+<p>The predictor variables $x_5$, $x_9$,$x_{13}$ and interaction $x_5:x_{16}$ and $x_{14}:x_{16}$ have a positive linear relationship with $Y_1$ which means that increasing one of these variables will increase the value of $y_1$ and vies versa. 
+Whereas, the other variables have a negative linear relationship with $y_1$. Note also that $x_5$ and $x_5:x_{16}$ have a relationship  close to zero towards $y_1$. It could be interpreted in a similar fashion for the other response variables.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Multivariate-Normality-Assumption-Check-for-the-Data">Multivariate Normality Assumption Check for the Data<a class="anchor-link" href="#Multivariate-Normality-Assumption-Check-for-the-Data">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[55]:</div>
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="kp">message</span><span class="p">(</span><span class="s">&quot;Multivariate Normality Assumption check for the selected Variables&quot;</span><span class="p">)</span>
-
-normForest<span class="o">=</span><span class="kt">data.frame</span><span class="p">(</span>forest <span class="o">%&gt;%</span> select<span class="p">(</span> y1<span class="p">,</span>y2<span class="p">,</span>y3<span class="p">,</span>x5 <span class="p">,</span> x6<span class="p">,</span> x9 <span class="p">,</span>x12<span class="p">,</span> x13<span class="p">,</span> x14 <span class="p">,</span> x16<span class="p">))</span>
-normForest<span class="o">$</span>x16<span class="o">=</span><span class="kp">ifelse</span><span class="p">(</span>normForest<span class="o">$</span>x16<span class="o">==</span><span class="s">&quot;Sec&quot;</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">)</span> <span class="c1">#Sec=0, else 1</span>
-normForest<span class="o">=</span><span class="kp">as.matrix</span><span class="p">(</span>normForest<span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span>normmultdata<span class="o">=</span><span class="kt">data.frame</span><span class="p">(</span>multdata <span class="o">%&gt;%</span> select<span class="p">(</span> y1<span class="p">,</span>y2<span class="p">,</span>y3<span class="p">,</span>x5 <span class="p">,</span> x6<span class="p">,</span> x9 <span class="p">,</span>x12<span class="p">,</span> x13<span class="p">,</span> x14 <span class="p">,</span> x16<span class="p">))</span>
+normmultdata<span class="o">$</span>x16<span class="o">=</span><span class="kp">ifelse</span><span class="p">(</span>normmultdata<span class="o">$</span>x16<span class="o">==</span><span class="s">&quot;Sec&quot;</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">)</span> <span class="c1">#Sec=0, else 1</span>
+normmultdata<span class="o">=</span><span class="kp">as.matrix</span><span class="p">(</span>normmultdata<span class="p">)</span>
 
 Di_square<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="kp">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">35</span><span class="p">))</span>
-meanNForest<span class="o">=</span><span class="kp">apply</span><span class="p">(</span>normForest<span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="kp">mean</span><span class="p">)</span>
-CovNforest<span class="o">=</span>cov<span class="p">(</span>normForest<span class="p">)</span>
+meanNmultdata<span class="o">=</span><span class="kp">apply</span><span class="p">(</span>normmultdata<span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="kp">mean</span><span class="p">)</span>
+CovNmultdata<span class="o">=</span>cov<span class="p">(</span>normmultdata<span class="p">)</span>
 
 <span class="kr">for</span><span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="m">35</span><span class="p">)</span>
 <span class="p">{</span>
-Di_square<span class="p">[</span>i<span class="p">]</span><span class="o">=</span><span class="kp">t</span><span class="p">(</span>normForest<span class="p">[</span>i<span class="p">,]</span><span class="o">-</span>meanNForest<span class="p">)</span><span class="o">%*%</span><span class="kp">solve</span><span class="p">(</span>CovNforest<span class="p">)</span><span class="o">%*%</span><span class="p">(</span>normForest<span class="p">[</span>i<span class="p">,]</span><span class="o">-</span>meanNForest<span class="p">)</span>
+Di_square<span class="p">[</span>i<span class="p">]</span><span class="o">=</span><span class="kp">t</span><span class="p">(</span>normmultdata<span class="p">[</span>i<span class="p">,]</span><span class="o">-</span>meanNmultdata<span class="p">)</span><span class="o">%*%</span><span class="kp">solve</span><span class="p">(</span>CovNmultdata<span class="p">)</span><span class="o">%*%</span><span class="p">(</span>normmultdata<span class="p">[</span>i<span class="p">,]</span><span class="o">-</span>meanNmultdata<span class="p">)</span>
 <span class="p">}</span>
 
 Di_square_sort<span class="o">=</span><span class="kp">sort</span><span class="p">(</span>Di_square<span class="p">)</span>
-p<span class="o">=</span><span class="kp">ncol</span><span class="p">(</span>normForest<span class="p">)</span>
-n<span class="o">=</span><span class="kp">nrow</span><span class="p">(</span>normForest<span class="p">)</span>
+p<span class="o">=</span><span class="kp">ncol</span><span class="p">(</span>normmultdata<span class="p">)</span>
+n<span class="o">=</span><span class="kp">nrow</span><span class="p">(</span>normmultdata<span class="p">)</span>
 alpha1<span class="o">=</span><span class="p">(</span>p<span class="m">-2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="m">2</span><span class="o">*</span>p<span class="p">)</span>
 beta1<span class="o">=</span><span class="p">(</span>n<span class="o">-</span>p<span class="m">-3</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="m">2</span><span class="o">*</span><span class="p">(</span>n<span class="o">-</span>p<span class="m">-1</span><span class="p">))</span>
 Vi<span class="o">=</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">35</span><span class="p">)</span><span class="o">-</span>alpha1<span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="m">35</span><span class="o">-</span>alpha1<span class="o">-</span>beta1<span class="m">+1</span><span class="p">)</span>
@@ -1318,10 +1401,10 @@ ggplot<span class="p">(</span>Normdata<span class="p">,</span> aes<span class="p
 
 maxDi<span class="o">=</span><span class="kp">round</span><span class="p">(</span><span class="kp">max</span><span class="p">(</span>Di_square_sort<span class="p">),</span><span class="m">2</span><span class="p">)</span>
 tabvalue<span class="o">=</span><span class="kp">paste</span><span class="p">(</span><span class="s">&quot;at Alpha=0.05 and p=10,n=35 we get D-value=15.75&quot;</span><span class="p">)</span> <span class="c1">#Table A.6. </span>
-<span class="kp">sprintf</span><span class="p">(</span><span class="s">&quot;From the graph we can conclude as the Multivariate Normality assumption is not violated. </span>
+<!--<span class="kp">sprintf</span><span class="p">(</span><span class="s">&quot;From the graph we can conclude that the Multivariate Normality assumption is not violated. </span>
 <span class="s">However,the numerical result indicates the Multivariate Normality assumption violated. </span>
 <span class="s">The calcuated value (%s) is greater than the tabulated value (%s). However, if we extrapolate abit might be OK to accept Normality </span>
-<span class="s">since we couldn&#39;t get the exact value from the table for our p size.&quot;</span><span class="p">,</span>maxDi<span class="p">,</span>tabvalue <span class="p">)</span>
+<span class="s">since we couldn&#39;t get the exact value from the table for our p size.&quot;</span><span class="p">,</span>maxDi<span class="p">,</span>tabvalue <span class="p">)</span>-->
 </pre></div>
 
 </div>
@@ -1333,18 +1416,11 @@ tabvalue<span class="o">=</span><span class="kp">paste</span><span class="p">(</
 
 
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>Multivariate Normality Assumption check for the selected Variables
-</pre>
-</div>
-</div>
-
-<div class="output_area"><div class="prompt"></div>
 
 <div class="output_html rendered_html output_subarea ">
-"From the graph we can conclude as the Multivariate Normality assumption is not violated. 
+"From the graph we can conclude that the Multivariate Normality assumption is not violated. 
 However,the numerical result indicates the Multivariate Normality assumption violated. 
-The calcuated value (22.12) is greater than the tabulated value (at Alpha=0.05 and p=10,n=35 we get D-value=15.75). However, if we extrapolate abit might be OK to accept Normality 
+The calculated value (22.12) is greater than the tabulated value (at Alpha=0.05 and p=10,n=35 we get D-value=15.75). However, if we extrapolate a bit, might be OK to accept Normality 
 since we couldn't get the exact value from the table for our p size."
 </div>
 
@@ -1378,10 +1454,10 @@ since we couldn't get the exact value from the table for our p size."
 <div class="prompt input_prompt">In&nbsp;[56]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>ForestResid<span class="o">=</span><span class="kt">data.frame</span><span class="p">(</span>modelInteraction2<span class="o">$</span>residuals<span class="p">)</span>
-p1<span class="o">=</span>ggplot<span class="p">(</span>ForestResid<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">35</span><span class="p">),</span>y<span class="o">=</span>y1<span class="p">))</span> <span class="o">+</span> geom_point<span class="p">()</span><span class="o">+</span>labs<span class="p">(</span>x<span class="o">=</span><span class="s">&quot; &quot;</span><span class="p">,</span>y<span class="o">=</span><span class="s">&quot;y1 Residual&quot;</span><span class="p">)</span> 
-p2<span class="o">=</span>ggplot<span class="p">(</span>ForestResid<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">35</span><span class="p">),</span>y<span class="o">=</span>y2<span class="p">))</span> <span class="o">+</span> geom_point<span class="p">()</span><span class="o">+</span>labs<span class="p">(</span>x<span class="o">=</span><span class="s">&quot; &quot;</span><span class="p">,</span>y<span class="o">=</span><span class="s">&quot;y2 Residual&quot;</span><span class="p">)</span> 
-p3<span class="o">=</span>ggplot<span class="p">(</span>ForestResid<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">35</span><span class="p">),</span>y<span class="o">=</span>y3<span class="p">))</span> <span class="o">+</span> geom_point<span class="p">()</span><span class="o">+</span>labs<span class="p">(</span>x<span class="o">=</span><span class="s">&quot; &quot;</span><span class="p">,</span>y<span class="o">=</span><span class="s">&quot;y3 Residual&quot;</span><span class="p">)</span> 
+<div class=" highlight hl-r"><pre><span></span>multdataResid<span class="o">=</span><span class="kt">data.frame</span><span class="p">(</span>modelInteraction2<span class="o">$</span>residuals<span class="p">)</span>
+p1<span class="o">=</span>ggplot<span class="p">(</span>multdataResid<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">35</span><span class="p">),</span>y<span class="o">=</span>y1<span class="p">))</span> <span class="o">+</span> geom_point<span class="p">()</span><span class="o">+</span>labs<span class="p">(</span>x<span class="o">=</span><span class="s">&quot; &quot;</span><span class="p">,</span>y<span class="o">=</span><span class="s">&quot;y1 Residual&quot;</span><span class="p">)</span> 
+p2<span class="o">=</span>ggplot<span class="p">(</span>multdataResid<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">35</span><span class="p">),</span>y<span class="o">=</span>y2<span class="p">))</span> <span class="o">+</span> geom_point<span class="p">()</span><span class="o">+</span>labs<span class="p">(</span>x<span class="o">=</span><span class="s">&quot; &quot;</span><span class="p">,</span>y<span class="o">=</span><span class="s">&quot;y2 Residual&quot;</span><span class="p">)</span> 
+p3<span class="o">=</span>ggplot<span class="p">(</span>multdataResid<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">35</span><span class="p">),</span>y<span class="o">=</span>y3<span class="p">))</span> <span class="o">+</span> geom_point<span class="p">()</span><span class="o">+</span>labs<span class="p">(</span>x<span class="o">=</span><span class="s">&quot; &quot;</span><span class="p">,</span>y<span class="o">=</span><span class="s">&quot;y3 Residual&quot;</span><span class="p">)</span> 
   
 grid.arrange<span class="p">(</span>p1<span class="p">,</span>p2<span class="p">,</span>p3<span class="p">,</span>ncol<span class="o">=</span><span class="m">2</span><span class="p">)</span>
 </pre></div>
@@ -1413,58 +1489,34 @@ grid.arrange<span class="p">(</span>p1<span class="p">,</span>p2<span class="p">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>According to the Normality plot and the Residuals plot, we can conclude that the selected model is a very legit one.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Reference">Reference<a class="anchor-link" href="#Reference">&#182;</a></h2>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[57]:</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="kp">message</span><span class="p">(</span><span class="s">&quot;The Book I used:&quot;</span><span class="p">)</span>
-
-<span class="kp">message</span><span class="p">(</span><span class="s">&quot;[Alvin_C._Rencher]_Methods_of_Multivariate_Analysi&quot;</span><span class="p">)</span>
-<span class="kp">message</span><span class="p">(</span><span class="s">&quot;Chapter 10 for Multivariate Regression theory and assumptions.&quot;</span><span class="p">)</span>
-<span class="kp">message</span><span class="p">(</span><span class="s">&quot;Chapter 4 for Multivariate Normality check&quot;</span><span class="p">)</span>
-</pre></div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>[Alvin_C._Rencher] Methods of Multivariate Analysis, 2nd edition.</p>
 
 </div>
 </div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>The Book I used:
-[Alvin_C._Rencher]_Methods_of_Multivariate_Analysi
-Chapter 10 for Multivariate Regression theory and assumptions.
-Chapter 4 for Multivariate Normality check
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
 </div>
     </div>
   </div>
+  <footer>
+	<p style="text-align:center">© 2016 Altaye</p>
+    </footer>
 </body>
 </html>
