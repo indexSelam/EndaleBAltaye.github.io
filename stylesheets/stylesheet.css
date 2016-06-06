@@ -20,7 +20,7 @@ article, aside, footer, header, main, nav, section {
 }
 
 body {
-  width: 1500px; /* size of the web page */
+  width: 1300px; /* size of the web page */
   margin-left: auto; /* for keeping the webpage center */
   margin-right: auto;
   background-color: LightGray ; /* was #f0f0f0 */
