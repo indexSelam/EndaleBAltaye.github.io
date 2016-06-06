@@ -18,7 +18,7 @@ article, aside, footer, header, main, nav, section {
   font-size: 30px;
   font-family: "Times New Roman", Georgia, Serif;
 }
-
+/* <p style="text-align:justify">*/ 
 body {
   width: 1500px; /* size of the web page */
   margin-left: auto; /* for keeping the webpage center */
@@ -27,6 +27,7 @@ body {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 25px;
 }
+  
 nav {
   background-color: LightGray ; /* was #20416c */
   padding: 10px; /* rectangle height */
@@ -37,9 +38,6 @@ nav {
   li a {  color: black;
        font-size: 25px;
 }
-
-
-
 
 li {
   display: inline;
@@ -54,6 +52,8 @@ section { /*adjust only for the sections only */
   background-color: LightGrey ; /* was #bbbbbb */
   margin-top: 10px;
   padding: 5px;
+  font-size: 23px;
+ text-align:justify;
 }
 
 article {
@@ -63,7 +63,7 @@ article {
 }
 
 main {
- width: 1040px; /* to length of the box containing the main body with out side */
+  width: 1040px; /* to length of the box containing the main body with out side */
   float: left; /*to keep the aside to the right*/
   margin-bottom: 10px;
 }
