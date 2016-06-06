@@ -63,7 +63,7 @@ article {
 }
 
 main {
- /*width: 960 px; /* to length of the box containing the main body with out side */
+ /*width: 960 px;*/ /* to length of the box containing the main body with out side */
   float: left; /*to keep the aside to the right*/
   margin-bottom: 10px;
 }
