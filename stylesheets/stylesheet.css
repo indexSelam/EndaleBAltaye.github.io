@@ -20,9 +20,12 @@ article, aside, footer, header, main, nav, section {
 }
 /* <p style="text-align:justify">*/ 
 body {
-  width: 1500px; /* size of the web page */
-  margin-left: auto; /* for keeping the webpage center */
-  margin-right: auto;
+  max-width: 1080px;
+   margin: 0 auto !important;
+  
+ /* width: 1500px; /* size of the web page */ */
+  /*margin-left: auto; /* for keeping the webpage center */ */
+  /*margin-right: auto; */
   background-color: LightGray ; /* was #f0f0f0 */
   font-family: Helvetica, Arial, sans-serif;
   font-size: 25px;
