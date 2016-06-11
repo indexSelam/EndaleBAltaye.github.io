@@ -70,7 +70,7 @@ main {
 
 aside{
   background-color: #bbbbbb;
-  width: 2500px;
+  width: 250px;
   float: right; /* since the main section is on the left*/
   padding: 20px;
   margin-top: 10px;
