@@ -52,7 +52,7 @@ section { /*adjust only for the sections only */
   background-color: LightGrey ; /* was #bbbbbb */
   margin-top: 10px;
   padding: 5px;
-  font-size: 23px;
+  font-size: 20px;
  text-align:justify;
 }
 
@@ -63,14 +63,14 @@ article {
 }
 
 main {
-  width: 790px; /* to length of the box containing the main body with out side */
+  width: 770px; /* to length of the box containing the main body with out side */
   float: left; /*to keep the aside to the right*/
   margin-bottom: 10px;
 }
 
 aside{
   background-color: #bbbbbb;
-  width: 300px;
+  width: 2500px;
   float: right; /* since the main section is on the left*/
   padding: 20px;
   margin-top: 10px;
