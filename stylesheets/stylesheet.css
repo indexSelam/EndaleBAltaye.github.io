@@ -70,7 +70,7 @@ main {
 
 aside{
   background-color: #bbbbbb;
-  width: 20% /*150px; */
+  width: 30% /*150px; */
   float: right; /* since the main section is on the left*/
   padding: 20px;
   margin-top: 10px;
@@ -81,5 +81,5 @@ footer {
   clear: both;
   background-color: #20416c;
   color: white;
-  padding: 5px 20px;
+  padding: 3px 20px;
 }
