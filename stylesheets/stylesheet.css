@@ -15,7 +15,7 @@ article, aside, footer, header, main, nav, section {
   background-color: maroon; /*was #11233b */
   color: black;
   padding: 10px 10px;
-  font-size: 30px;
+  font-size: 25px;
   font-family: "Times New Roman", Georgia, Serif;
 }
 /* <p style="text-align:justify">*/ 
@@ -64,7 +64,7 @@ article {
 }
 
 main {
-  width: 760px; /* to length of the box containing the main body with out side */
+  width: 900px; /* to length of the box containing the main body with out side */
   float: left; /*to keep the aside to the right*/
   margin-bottom: 10px;
   font-size: 20px;
@@ -72,7 +72,7 @@ main {
 
 aside{
   background-color: #bbbbbb;
-  width: 250px;
+  width: 220px;
   float: right; /* since the main section is on the left*/
   padding: 20px;
   margin-top: 10px;
