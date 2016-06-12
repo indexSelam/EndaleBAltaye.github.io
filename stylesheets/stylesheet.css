@@ -64,7 +64,7 @@ article {
 }
 
 main {
-  width:760px; /* to length of the box containing the main body with out side */
+  width: 760px; /* to length of the box containing the main body with out side */
   float: left; /*to keep the aside to the right*/
   margin-bottom: 10px;
   font-size: 20px;
