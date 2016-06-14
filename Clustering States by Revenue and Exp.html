@@ -178,7 +178,7 @@ div.prompt {display:none}
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Hierarchical-Cluster-Analysis-of-USA-STATES-based-on-their-Revenue-and-Expenditure,-2013-data">Hierarchical Cluster Analysis of USA STATES based on their Revenue and Expenditure, combined and separate, 2013 data<a class="anchor-link" href="#Hierarchical-Cluster-Analysis-of-USA-STATES-based-on-their-Revenue-and-Expenditure,-2013-data">&#182;</a></h1>
+<h1 id="Hierarchical-Cluster-Analysis-of-USA-STATES-based-on-their-Revenue-and-Expenditure,-2013-data">Hierarchical Cluster Analysis of USA STATES based on the combination and separate of their Revenue and Expenditure of 2013 data<a class="anchor-link" href="#Hierarchical-Cluster-Analysis-of-USA-STATES-based-on-their-Revenue-and-Expenditure,-2013-data">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -232,7 +232,7 @@ colnamess<span class="o">=</span><span class="kp">paste0</span><span class="p">(
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Revenue-and-Expenditure-Variables-considered">Combination of Revenue and Expenditure Variables considered<a class="anchor-link" href="#Revenue-and-Expenditure-Variables-considered">&#182;</a></h3>
+<h3 id="Revenue-and-Expenditure-Variables-considered">Hierarchical Cluster Analysis of states based on their Expenditure and Revenue<a class="anchor-link" href="#Revenue-and-Expenditure-Variables-considered">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -319,7 +319,7 @@ Finances<span class="p">[,</span><span class="kt">c</span><span class="p">(</spa
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Hierarchical-Clustering-Function-in-R">Hierarchical Clustering Function in R<a class="anchor-link" href="#Hierarchical-Clustering-Function-in-R">&#182;</a></h4>
+<h4 id="Hierarchical-Clustering-Function-in-R">Built in function for Hierarchical Clustering in R<a class="anchor-link" href="#Hierarchical-Clustering-Function-in-R">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -377,7 +377,7 @@ rect.hclust<span class="p">(</span>financesHClust<span class="p">,</span> k<span
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>As we can see its clear that according to the Expenditure and Revenue values 5 cluster is a logical cluster to do. These are;</p>
+<p>As we can see in the dendrogram, its clear that according to the Expenditure and Revenue values, 5 cluster is a logical cluster size. These clusters are;</p>
 <ul>
 <li>Cluster 1: Texas State</li>
 <li>Cluster 2: New York State</li>
@@ -404,7 +404,7 @@ rect.hclust<span class="p">(</span>financesHClust<span class="p">,</span> k<span
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Cluster-Analysis-of-USA-STATES-based-on-their-2013-Revenue-Only">Hierarchical Cluster Analysis of USA STATES based on their 2013 Revenue Only<a class="anchor-link" href="#Cluster-Analysis-of-USA-STATES-based-on-their-2013-Revenue-Only">&#182;</a></h1>
+<h1 id="Cluster-Analysis-of-USA-STATES-based-on-their-2013-Revenue-Only">Hierarchical Cluster Analysis based on State's Revenue Only<a class="anchor-link" href="#Cluster-Analysis-of-USA-STATES-based-on-their-2013-Revenue-Only">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -427,7 +427,7 @@ Finances2013Revenue<span class="o">=</span><span class="kp">cbind.data.frame</sp
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Stream of Revenues that are considered for the study are listed below. Note that majority of them are revenues through tax.</p>
+<p>Stream of Revenues that are considered for the study are listed below. Note that, majority are revenues through tax.</p>
 
 </div>
 </div>
@@ -513,7 +513,7 @@ rect.hclust<span class="p">(</span>RevenueHClust<span class="p">,</span> k<span 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>As we can in the above cluster plot, its clear that according to Revenue 5 cluster is a logical cluster number. The clusters are;</p>
+<p>As we can see in the above dendrogram, its clear that, according to state's Revenue, cluster of size 5 is a significant size. The clusters under this clustering are:</p>
 <ul>
 <li>Cluster 1: California State</li>
 <li>Cluster 2: New York State</li>
@@ -527,7 +527,7 @@ rect.hclust<span class="p">(</span>RevenueHClust<span class="p">,</span> k<span 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Cluster-Analysis-of-USA-STATES-based-on-their-2013-Revenue-Only">Hierarchical Cluster Analysis of USA STATES based on their 2013 Expenditure Only<a class="anchor-link" href="#Cluster-Analysis-of-USA-STATES-based-on-their-2013-Revenue-Only">&#182;</a></h1>
+<h1 id="Cluster-Analysis-of-USA-STATES-based-on-their-2013-Revenue-Only">Hierarchical Cluster Analysis based on their Expenditure Only<a class="anchor-link" href="#Cluster-Analysis-of-USA-STATES-based-on-their-2013-Revenue-Only">&#182;</a></h1>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
@@ -637,8 +637,7 @@ rect.hclust<span class="p">(</span>ExpenditureHClust<span class="p">,</span> k<s
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>As we can in the above cluster plot, its clear that according to Expenditure amount 5 cluster is a logical cluster
-number. The clusters are;</p>
+<p>As we can see in the above dendrogram, its clear that the states clustered in to 5. These clusters are:</p>
 <ul>
 <li>Cluster 1:  Texas State </li>
 <li>Cluster 2: New York State</li>
