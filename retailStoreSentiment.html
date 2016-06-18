@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- <meta charset="UTF-8"> -->
+    <meta charset="UTF-8"> 
     <title>Endale B Altaye</title>
    <!--  <link rel="stylesheet" type="text/css" href="Githubwebsitecss.css"> <!-- To link with the stylesheet.css file -->  --> 
      <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css">
@@ -42,8 +42,8 @@ th, td {
     </header>
 
    <ul>
-	     <li><a href="Githubwebsite.html">Home</a></li> 
-    <!-- <li><a href="index.html">Home</a></li>  --> 
+	    <!-- <li><a href="Githubwebsite.html">Home</a></li> --> 
+     <li><a href="index.html">Home</a></li>  
 	   <li><a href="EndaleBAltayeResume.html">Resume</a></li>
        <li><a href="ClassProject.html">Projects</a></li>
 	   <li><a href="courses.html">Grad Courses</a></li>
@@ -146,10 +146,10 @@ The score value for each tweet is calculated as: <code>Score=TotalPostiveWords-T
 <h3 style="color:green;">Extracting Tweets</h3>
 <p>The information that I extracted from each tweets are:</p>
 <ul>
-<li>Tweet text using  <i>getText()</i> </li> <br>
-<li>Whether its a retweet or not using <i>isRetweet()</i></li><br>
-<li>Number of retweets using <i>retweetCount()retweetCount()</i></li><br>
-<li>Number of favourites using <i> favoriteCount()favoriteCount()</i></li>
+	<li>Tweet text using  <i>getText()</i> </li> <br>
+	<li>Whether its a retweet or not using <i>isRetweet()</i></li><br>
+	<li>Number of retweets using <i>retweetCount()</i></li><br>
+	<li>Number of favourites using <i> favoriteCount()</i></li>
 </ul>
 
 <pre class="r"><code class="r"><span class="identifier">Amazontweets</span> <span class="operator">=</span> <span class="identifier">searchTwitter</span><span class="paren">(</span><span class="string">"Amazon"</span>, <span class="identifier">n</span><span class="operator">=</span><span class="number">1000</span>,<span class="identifier">resultType</span><span class="operator">=</span><span class="string">"recent"</span>, <span class="identifier">lang</span><span class="operator">=</span><span class="string">"en"</span><span class="paren">)</span> 
