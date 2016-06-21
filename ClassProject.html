@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8">
     <title>Endale B Altaye</title>
-   <!--  <link rel="stylesheet" type="text/css" href="Githubwebsitecss.css"> -->   
-     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css">
+   <!--<link rel="stylesheet" type="text/css" href="Githubwebsitecss.css"> <!-- To link with the stylesheet.css file   --> 
+       <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css">
 	<!-- for internet explorer version older than version 9 -->
 	<!--[if lt IE 9]> 
     <script>
@@ -29,10 +29,10 @@ th, td {
   </head>
    <body>
     <header class="banner"> 
-      <h1>Endale B Altaye</h1>
-     <p> 
-	 Bowling Green State University   <!-- <span style="width:650px;display:inline-block"></span> -->
-<a href="http://www.bgsu.edu/"> <image src="bgsu.jpg" alt="Rmarkdown " height="75" width="75" style="float:right" title="Bowling Green State University"> </a>
+      <h2>Endale B Altaye</h2>
+      <p> 
+	  Bowling Green State University   <!-- <span style="width:650px;display:inline-block"></span> -->
+	  <a href="http://www.bgsu.edu/"> <image src="bgsu.jpg" alt="Rmarkdown " height="75" width="75" style="float:right" title="Bowling Green State University"> </a>
 <a href="https://www.ntnu.edu/"> <image src="NTNU.jpg" alt="Rmarkdown " height="75" width="75" style="float:right" title="Norwegian University of Science and Technology"> </a>
 <a href="http://www.hu.edu.et/hu/"> <image src="HUniversity.jpe" alt="Rmarkdown " height="75" width="75" style="float:right" title="Hawassa University"></a>
 	   </p>
@@ -45,8 +45,8 @@ th, td {
 
     <nav>
       <ul>
-	    <!-- <li><a href="Githubwebsite.html">Home</a></li> --> 
-     <li><a href="index.html">Home</a></li>  
+	    <!--  <li><a href="Githubwebsite.html">Home</a></li> --> 
+    <li><a href="index.html">Home</a></li>  
 	   <li><a href="EndaleBAltayeResume.html">Resume</a></li>
        <li><a href="ClassProject.html">Projects</a></li>
 	   <li><a href="courses.html">Grad Courses</a></li>
@@ -59,39 +59,11 @@ th, td {
 	   <h5 style="color:green;text-align:center;font-size:130%;">
 	In this page, you will find my projects.
 	  </h1>
-	
+	  <br>
 	<section>
-	  <h3 style="color:green;font-size:120%;"> Time Series Project</h3>
-	  <p style="font-size:90%;">  <p>I have used monthly Apple Stock price (Opening price) from the time period of
-	  2005-03-01 to 2014-06-02. Applied Box-Jenkins, ARIMA(p,d,q), modelling and done forecasting using the 
-	  model selected. The analysis suggest that at logarithmic scale level, the open price for any selected 
-	  month is <b>on average</b> equals with the previous month open price. Analysis provided here	  
-	  <a href="TimeSeriesProject.html">Time Series Project</a></p>
-	  </p>
-	 </section>
-	  <br>
-<section>
-	  <h3 style="color:green;font-size:120%;"> Text (Sentence) Classification</h3>
-	  <p style="font-size:90%;">  <p>President Obama's 2009 inaugural speech and 2012 Presidential candidate, then Governor Mitt Romney's 
-	  campaign speech, transcript version, have been used to do sentence classification.  After I created the corpus and did different text 
-	  cleaning procedures on it, I passed it through three algorithms.
-	  <a href="https://en.wikipedia.org/wiki/Support_vector_machine">Support Vector Machine (SVM)</a></li> , 
-	  <a href="https://en.wikipedia.org/wiki/Random_forest">Random Forest (RF)</a></li> and 
-	  <a href="https://en.wikipedia.org/wiki/Decision_tree">Decision Tree(Tree) </a></li>  
-	  (Tree) were the ones I used to classify a random sentence either to President Obama's or Gov. Mitt Romney's used sentence. I used Precision, 
-	  recall and Accuracy to select the model which does a better job in classifying the sentence correctly. Finally, RF became the winner 
-	  model with 75 percent accuracy and 85% precision. </p>
-	  <p> According to the result I made the following interpretations. Among the total sentences predicted to be in Pres.Obma’s 
-	  speech, 85% of them are factually correct. On the other hand, 73 % of Gov Romney’s predicted sentences are factually correct. 
-	  95 % of Gov Romney’s sentence are predicted correctly. Whereas, 45% of Pres. Obama’s speech sentences are managed to be predicted correctly. This makes 
-it hard to predict President Obama’s sentence than Gov. Romeny's. Need to be remembered that the theme of the speeches were not the same.
-	  </p> The detail report is given here: <a href="Sentenceclassification.html">Sentence Classification</a></li>
-	  </p>
-	  <br>
-	  <section>
 	  <h3 style="color:green;font-size:120%;"> Hierarchical Cluster Analysis of USA STATES based on 
 	  their Revenue and Expenditure </h3>
-	  <p style="font-size:90%;"> <p> This project is based on the <b>State Government Finances: 2013</b> data provided on the
+	  <p style="font-size:90%;"> <p> This project is based on the <b>State Government Finances: 2013</b> data provided on
 	  <a href="http://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?src=bkmk.html" target="_blank"> data
 	  link.</a> The finance data contains around 52 fields or attributes. However, for this study I chose to 
 focus on <b>Expenditure Amounts</b> and <b> Revenue Amounts</b> to do Hierarchical Clustering (HC) of States. The amounts 
@@ -113,34 +85,62 @@ and revenue amounts. This analysis is followed by doing HC of states by consider
 </table>
 <br>
 <p>
-As we can clearly see from the three studies, the <b> State of California</b> and <b>State of New York </b> are the two 
-states different from each other and way unequal from other states in both revenue and
+As we can clearly see from the three studies, <b> State of California</b> and <b>State of New York </b> are the two 
+states with way different from each other and way unequal from other states in both revenue and
  expenditure amounts. When we look at the case for <b>State of Texas </b>, only focusing on expenditure 
  or a combination of expenditure and revenue amounts, it stood alone. However, when we look at the cluster analysis considering only revenue amounts, 
- State of Texas's revenue is significantly equal with State of Florida. From the fourth cluster, we can see that 
+ State of Texas's revenue is significantly equal with State of Florida. From the fourth cluster we can see that 
  the state of Pennsylvania, Illinois, Ohio and Michigan are significantly equal in revenue and expenditure amounts. Interestingly,
-a significant number of states are in cluster 5 which implies that these state's expenditure and revenue amount is not as 
- significantly different as formerly listed states. Of course, we can slice cluster 5 down but it might not be that significant. Note 
+ significant number of states are on cluster 5 which implies that these state's Expenditure and Revenue amount is not as 
+ significantly different as initially listed once. Of course, we can slice cluster 5 down but it might not be that significant. Note 
 that, according to USA population Census 2013,  the states found in either of the first four clusters have a population size ranking among the top
-10. This shows the consistency of the analysis with the fact that population size has a significant impact on the state's revenue and expenditure.   </p>
+10. This shows the consistency of the analysis with the fact that population size have a significant impact on the states revenue and expenditure.   </p>
 
     
 <p>Detail analysis including the R-code is give here<a href="Clustering States by Revenue and Exp.html">Hierarchical Cluster Analysis detail result</a></li>
 	  </p>
 </section>
+<br>
+	<section>
+	  <h3 style="color:green;font-size:120%;"> Time Series Project</h3>
+	  <p style="font-size:90%;">  <p>I have used monthly Apple Stock price (Opening price) from the time period of
+	  2005-03-01 to 2014-06-02. Applied Box-Jenkins, ARIMA(p,d,q), modelling and done forecasting using the 
+	  model selected. The analysis suggest that at logarithmic scale level, the open price for any selected 
+	  month is <b>on average</b> equals with the previous month open price. Analysis provided here	  
+	  <a href="TimeSeriesProject.html">Time Series Project</a></p>
+	  </p>
+	 </section>
+	  <br>
+<section>
+	  <h3 style="color:green;font-size:120%;"> Text (Sentence) Classification</h3>
+	  <p style="font-size:90%;">  <p>President Obama's 2009 inaugural speech and 2012 Presidential candidate, then Governor Mitt Romney's 
+	  campaign speech, transcript version, have been used to do sentence classification.  After I created the corpus and did different text 
+	  cleaning procedures on it, I passed it through three algorithms.
+	  <a href="https://en.wikipedia.org/wiki/Support_vector_machine">Support Vector Machine (SVM)</a></li> , 
+	  <a href="https://en.wikipedia.org/wiki/Random_forest">Random Forest (RF)</a></li> and 
+	  <a href="https://en.wikipedia.org/wiki/Decision_tree">Decision Tree(Tree) </a></li>  
+	  (Tree) were the one I used to classify a random sentence either to President Obama's or Gov. Mitt Romney's used sentence. I used Precision, 
+	  recall and Accuracy to select the model which does a better job in classifying the sentence correctly. Finally, RF became the winner 
+	  model with 75 percent accuracy and 85% precision. </p>
+	  <p> According to the result I made the following interpretations. Among the total sentences predicted to be in Pres.Obma’s 
+	  speech, 85% of them are factually correct. On the other hand, 73 % of Gov Romney’s predicted sentences are factually correct. 
+	  95 % of Gov Romney’s sentence are predicted correctly. Whereas, 45% of Pres. Obama’s speech sentences are managed to be predicted correctly. This makes 
+it hard to predict President Obama’s sentence than Gov. Romeny's. Need to be remembered that the theme of the speeches were not the same.
+	  </p> Report given here: <a href="Sentenceclassification.html">Sentence Classification</a></li>
+	  </p>
+	  <br>
+	  
 <section>
 	  <h3 style="color:green;font-size:120%;"> Multivariate Multiple Regression Analysis </h3>
 	  <p style="font-size:90%;"> <p>
 	  Multivariate multiple linear regression is an analysis when we have several y’s (response variables) and several 
 	  x’s (predictor variables) in a regression setting. Multivariate refers to the dependent variables and multiple pertains 
-	  to the independent variables. Detail analysis and important assumption checks is provided here.<a href="MultivariateRegression.html">Multivariate Multiple 
+	  to the independent variables. </code>. Detail analysis and important assumption checks is provided here.<a href="MultivariateRegression.html">Multivariate Multiple 
 	  Regression Analysis</a> </p>
 	  </p>
 </section>
 
 <section>
-	
-	<section>
 <h3 style="color:green;font-size:120%;">Sentiment Analysis of the Four Retail Stores (Amazon, Best Buy, Walmart and Ebay) using Twitter data</h3>
 <div id="im-a-6-but-in-walmart-im-a-10-the-most-retweeted-related-to-walmart" class="section level4">
 <p style="text-align:center;"><img src="retailstores.png" width="200" height="200"> </p>
@@ -152,9 +152,8 @@ that, according to USA population Census 2013,  the states found in either of th
  <strong>Neutral</strong> sentiment. Interestingly, the most frequent retweet related to Walmart is <i>im a 6 but in walmart 
  im a 10 </i>. In addition, Walmart related tweets have a higher percentage of being retweets.</p> The detail analysis 
  is provided here.<a href="retailStoreSentiment.html">Retail Stores Sentiment Analysis</a> </p>
-</section>
 
-<br>
+</section>
 	  <br>
 	  More to come...
 </section>  
