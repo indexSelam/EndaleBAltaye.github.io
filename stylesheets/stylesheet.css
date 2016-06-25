@@ -38,7 +38,7 @@ nav {
   li a {  color: black;
        font-size: 25px;
 }
-
+/*
 li {
   display: inline;
   margin-left: 15px;
@@ -47,7 +47,17 @@ li {
   font-variant: small-caps;
   font-weight: bold; 
 }
-
+*/
+#headerlist li
+{
+display: inline;
+list-style-type: none;
+margin-left: 15px;
+margin-right: 15px;
+font-size: 20px;
+font-variant: small-caps;
+font-weight: bold; 
+} 
 section { /*adjust only for the sections only */
   background-color: LightGrey ; /* was #bbbbbb */
   margin-top: 10px;
