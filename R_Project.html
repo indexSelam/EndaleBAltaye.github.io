@@ -62,10 +62,10 @@ th, td {
 	 <!--   <h5 style="color:green;text-align:center;font-size:130%;">In this page, you will find my R-related projects.</h5>
 	 -->  <br>
 <section>
-<h3 style="color:green;text-align:center;font-size:120%;">Developed Algorithm for Forward, Backward and Stepwise variable selection using <b>P-value</b> only.</h3>
+<h3 style="color:green;text-align:center;font-size:120%;">Developed Algorithms for Forward, Backward and Stepwise variable selection during Multiple Linear regression using <b>P-value</b> only.</h3>
 <br>
 <p style="font-size:90%;">  I was doing multiple linear regression project on R with larger continuous and categorical variable size, when I 
-find myself wasting time to do stepwise variable selection. Searching a significant variable to add into the model and then look for dropping
+found myself wasting time to do stepwise variable selection. Searching a significant variable to add into the model and then look for dropping
  a variable and so on in each step. It was very tiring. I could have used the preexisting <em> step() from stats package</em> or <em>regsubsets 
  from leaps package</em>. However, these methods use AIC to do variable selection. AIC is one among the acceptable methods used to do model
  comparison or variable selection. However, AIC is way complicated to interpret and to even explain it for non-technical person. In addition, 
@@ -77,23 +77,23 @@ find myself wasting time to do stepwise variable selection. Searching a signific
 <ul style="list-style-type:square">
 	<li>P-values are straight forward to interpret and explain for non-technical person.</li>
 	<li>Different research areas apply different alpha, level of significance, values. The fact that each p-value should be compared with the alpha 
-	value, we can do variable selection for the alpha value the researcher chose.</li>
-	<li> The alpha value to add a variable (<b>alpha-to-enter</b>) often is not equal with alpha value to drop (<b>alpha-to-stay</b>). These should 
-	be decided by the researcher based on the application area and do the variable selection. </li>
+	value, we can do variable selection for the alpha value the we,the researcher, chose.</li>
+	<li> The alpha value to add a variable (<b>alpha-to-enter</b>) often is not equal with alpha value to drop (<b>alpha-to-stay</b>) a variable. These should 
+	be decided by the researcher based on the application area and do the variable selection using the p-value result. </li>
 	<li>By watching the p-value's magnitude, we can play around with the complexity of the model.</li>
 </ul>
 <br>
 <p style="font-size:90%;">  
 Thus, it's a great benefit to use the algorithm I prepared which does variable selection using P-value. Each method of variable selection 
-algorithms, (backward, forward and stepwise), are being written separately. Would have been best if it is just one algorithm for the
-three and difference on the input, but not yet. I am working on it. </p>
+algorithms, (backward, forward and stepwise), are being written separately. Would have been best if it is just one package for the
+three, but not yet. I am working on it. </p>
 
 <br>
 <h3> Instruction to use the algorithms </h3>
  <ul style="list-style-type:square">
 	<li>Each categorical variables or factors should be changed into dummy variables, can use the <em>dummy.data.frame() </em> function from 
-	the <em>dummies</em> package to change factors in to dummies, one column for each value. The reference value column for each categorical 
-	variable should be dropped from the data frame or data set for obvious reason.</li>
+	the <em>dummies</em> package to change factors into dummies, one column for each value. The reference value column for each categorical 
+	variable should be dropped from the data frame or data set for obvious reason, reference value.</li>
 	<li><b>Alpha-to-enter</b> for forward selection and  <b>alpha-to-stay</b> for backward elimination and both for stepwise should 
 	be decided and used as input.</li>
 	<li>After saving the algorithm use <span style="color:maroon;"> forwardSelection(data,"responceVariable",alphaToEnter)</span>  or
